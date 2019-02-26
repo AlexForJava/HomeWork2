@@ -11,7 +11,11 @@ public final class Tree {
     public Tree(String name, double height, Land land) {
         this.name = name;
         this.height = height;
-        this.land = land;
+        if (land == null) {
+            this.land = new Land("no location");
+        } else {
+            this.land = land;
+        }
     }
 
     public String getName() {
@@ -29,9 +33,6 @@ public final class Tree {
             landClone = land.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
-        }
-        if (landClone == null) {
-            throw new NullPointerException();
         }
         return landClone;
 

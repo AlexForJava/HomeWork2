@@ -12,20 +12,18 @@ public class ArraysSorting {
             arr[i] = (int) (Math.random() * 10);
         }
 
-        System.out.println(Arrays.toString(arr));
-
-        int[] qArr = quickSort(arr);
-        int[] mArr = mergeSort(arr);
-        int[] bArr = bubbleSort(arr);
-        int[] iArr = insertionSort(arr);
-        int[] sArr = selectionSort(arr);
+        int[] quickArray = quickSort(arr);
+        int[] mergeArray = mergeSort(arr);
+        int[] bubbleArray = bubbleSort(arr);
+        int[] insertionArray = insertionSort(arr);
+        int[] selectionArray = selectionSort(arr);
 
         System.out.println(Arrays.toString(arr) + "  ===> original");
-        System.out.println(Arrays.toString(qArr) + "  ===> quick");
-        System.out.println(Arrays.toString(mArr) + "  ===> merge");
-        System.out.println(Arrays.toString(bArr) + "  ===> bubble");
-        System.out.println(Arrays.toString(iArr) + "  ===> insertion");
-        System.out.println(Arrays.toString(sArr) + "  ===> selection");
+        System.out.println(Arrays.toString(quickArray) + "  ===> quick");
+        System.out.println(Arrays.toString(mergeArray) + "  ===> merge");
+        System.out.println(Arrays.toString(bubbleArray) + "  ===> bubble");
+        System.out.println(Arrays.toString(insertionArray) + "  ===> insertion");
+        System.out.println(Arrays.toString(selectionArray) + "  ===> selection");
     }
 
 
@@ -98,18 +96,21 @@ public class ArraysSorting {
         merge(array, low, mid);
         merge(array, mid + 1, high);
         int[] buf = Arrays.copyOf(array, array.length);
-        for (int k = low; k <= high; k++)
-            buf[k] = array[k];
-        int i = low, j = mid + 1;
         for (int k = low; k <= high; k++) {
-            if (i > mid) {
-                array[k] = buf[j++];
-            } else if (j > high) {
-                array[k] = buf[i++];
-            } else if (buf[j] < buf[i]) {
-                array[k] = buf[j++];
+            buf[k] = array[k];
+        }
+        //int i = low
+        //int j = mid + 1;
+        mid++;
+        for (int k = low; k <= high; k++) {
+            if (low > mid) {
+                array[k] = buf[mid++];
+            } else if (mid > high) {
+                array[k] = buf[low++];
+            } else if (buf[mid] < buf[low]) {
+                array[k] = buf[mid++];
             } else {
-                array[k] = buf[i++];
+                array[k] = buf[low++];
             }
         }
     }
@@ -125,12 +126,12 @@ public class ArraysSorting {
     }
 
     private static void insertion(int[] array) {
-        int temp, j;
         for (int i = 0; i < array.length - 1; i++) {
             if (array[i] > array[i + 1]) {
-                temp = array[i + 1];
-                array[i + 1] = array[i];
-                j = i;
+                int temp = array[i + 1];
+                //array[i + 1] = array[i];
+                swap(array, i + 1, i);
+                int j = i;
                 while (j > 0 && temp < array[j - 1]) {
                     array[j] = array[j - 1];
                     j--;
