@@ -11,11 +11,7 @@ public final class Tree {
     public Tree(String name, double height, Land land) {
         this.name = name;
         this.height = height;
-        if (land == null) {
-            this.land = new Land("no location");
-        } else {
-            this.land = land;
-        }
+        this.land = (land != null)? land: new Land("no location");
     }
 
     public String getName() {
