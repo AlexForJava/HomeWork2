@@ -8,20 +8,21 @@ import java.util.Arrays;
 public class ArraysSorting {
     public static void main(String[] args) {
         int[] arr = new int[10];
-        for (int i = 0; i < arr.length; i++)
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 10);
+        }
 
         System.out.println(Arrays.toString(arr));
 
-        int[]qArr = quickSort(arr);
-        int[]mArr = mergeSort(arr);
-        int[]bArr = bubbleSort(arr);
-        int[]iArr = insertionSort(arr);
-        int[]sArr = selectionSort(arr);
+        int[] qArr = quickSort(arr);
+        int[] mArr = mergeSort(arr);
+        int[] bArr = bubbleSort(arr);
+        int[] iArr = insertionSort(arr);
+        int[] sArr = selectionSort(arr);
 
-        System.out.println(Arrays.toString(arr) + "   ===> original");
-        System.out.println(Arrays.toString(qArr));
-        System.out.println(Arrays.toString(mArr));
+        System.out.println(Arrays.toString(arr) + "  ===> original");
+        System.out.println(Arrays.toString(qArr) + "  ===> quick");
+        System.out.println(Arrays.toString(mArr) + "  ===> merge");
         System.out.println(Arrays.toString(bArr) + "  ===> bubble");
         System.out.println(Arrays.toString(iArr) + "  ===> insertion");
         System.out.println(Arrays.toString(sArr) + "  ===> selection");
@@ -59,10 +60,12 @@ public class ArraysSorting {
     }
 
     private static void quick(int[] array, int low, int high) {
-        if (array.length == 0)
+        if (array.length == 0) {
             return;
-        if (low >= high)
+        }
+        if (low >= high) {
             return;
+        }
         int middle = low + (high - low) / 2;
         int opora = array[middle];
         int i = low, j = high;
@@ -74,22 +77,23 @@ public class ArraysSorting {
                 j--;
             }
             if (i <= j) {
-                int temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
+                swap(array, i, j);
                 i++;
                 j--;
             }
         }
-        if (low < j)
+        if (low < j) {
             quick(array, low, j);
-        if (high > i)
+        }
+        if (high > i) {
             quick(array, i, high);
+        }
     }
 
     private static void merge(int[] array, int low, int high) {
-        if (high <= low)
+        if (high <= low) {
             return;
+        }
         int mid = low + (high - low) / 2;
         merge(array, low, mid);
         merge(array, mid + 1, high);
@@ -99,29 +103,22 @@ public class ArraysSorting {
         int i = low, j = mid + 1;
         for (int k = low; k <= high; k++) {
             if (i > mid) {
-                array[k] = buf[j];
-                j++;
+                array[k] = buf[j++];
             } else if (j > high) {
-                array[k] = buf[i];
-                i++;
+                array[k] = buf[i++];
             } else if (buf[j] < buf[i]) {
-                array[k] = buf[j];
-                j++;
+                array[k] = buf[j++];
             } else {
-                array[k] = buf[i];
-                i++;
+                array[k] = buf[i++];
             }
         }
     }
 
     private static void bubble(int[] array) {
-        int temp;
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (array[i] < array[j]) {
-                    temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+                    swap(array, i, j);
                 }
             }
         }
@@ -146,13 +143,18 @@ public class ArraysSorting {
     private static void selection(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             int least = i;
-            for (int j = i + 1; j < array.length; j++)
+            for (int j = i + 1; j < array.length; j++) {
                 if (array[j] < array[least]) {
                     least = j;
                 }
-            int temp = array[least];
-            array[least] = array[i];
-            array[i] = temp;
+            }
+            swap(array, least, i);
         }
+    }
+
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }

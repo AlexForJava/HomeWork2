@@ -1,4 +1,4 @@
-package com.gmail.chernii.oleksii.innerclasses;
+package com.gmail.chernii.oleksii.inner;
 
 /**
  * Created by Space on 25.02.2019.

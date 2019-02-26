@@ -20,6 +20,6 @@ public class Land implements Cloneable {
 
     @Override
     public Land clone() throws CloneNotSupportedException {
-        return (Land) super.clone();
+        return (Land)super.clone();
     }
 }

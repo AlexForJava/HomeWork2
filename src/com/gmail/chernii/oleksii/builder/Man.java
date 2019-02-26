@@ -12,6 +12,13 @@ public class Man {
     private Man() {
     }
 
+    private Man(String name, String surname, int age, double weight) {
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.weight = weight;
+    }
+
     public static Builder newBuilder() {
         return new Man().new Builder();
     }
@@ -41,22 +48,22 @@ public class Man {
         private Builder() {
         }
 
-        public Builder setName(String name) {
+        public Builder name(String name) {
             Man.this.name = name;
             return this;
         }
 
-        public Builder setSurname(String surname) {
+        public Builder surname(String surname) {
             Man.this.surname = surname;
             return this;
         }
 
-        public Builder setAge(int age) {
+        public Builder age(int age) {
             Man.this.age = age;
             return this;
         }
 
-        public Builder setWeight(double weight) {
+        public Builder weight(double weight) {
             Man.this.weight = weight;
             return this;
         }
@@ -65,5 +72,44 @@ public class Man {
             return Man.this;
         }
 
+    }
+
+
+    public static BuilderStatic createBuilder() {
+        return new BuilderStatic();
+    }
+
+    public static class BuilderStatic {
+        private String name;
+        private String surname;
+        private int age;
+        private double weight;
+
+        private BuilderStatic() {
+        }
+
+        public BuilderStatic name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public BuilderStatic surname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public BuilderStatic age(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public BuilderStatic weight(double weight) {
+            this.weight = weight;
+            return this;
+        }
+
+        public Man build() {
+            return new Man(name, surname, age, weight);
+        }
     }
 }

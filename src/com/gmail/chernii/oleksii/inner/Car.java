@@ -1,4 +1,4 @@
-package com.gmail.chernii.oleksii.innerclasses;
+package com.gmail.chernii.oleksii.inner;
 
 import java.util.ArrayList;
 import java.util.List;
